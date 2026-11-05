@@ -1,10 +1,9 @@
 pages:
   stage: deploy
+  image: alpine:latest
   script:
-    - mkdir -p public
-    - cp index.html public/index.html
+    - mkdir .public && cp -r * .public && mv .public public
   artifacts:
-    paths:
-      - public
+    paths: [public]
   rules:
-    - if: $CI_COMMIT_BRANCH == "main"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

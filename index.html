@@ -3,11 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="Révisions 4ème : réviser en autonomie les mathématiques de 4ème par chapitre, avec rappels de cours, QCM et exercices auto-corrigés, pour préparer le passage en 3ème.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Révisions 4ème · Préparer le passage en 3ème">
+  <meta property="og:description" content="Révisions 4ème : réviser en autonomie les mathématiques de 4ème par chapitre, avec rappels de cours, QCM et exercices auto-corrigés, pour préparer le passage en 3ème.">
+  <meta property="og:url" content="https://auriaphilippe.forge.apps.education.fr/Revisions_passage_en_3eme/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+@font-face{font-family:'DM Sans';font-style:italic;font-weight:300;font-display:swap;src:url(assets/fonts/dmsans-italic-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'DM Sans';font-style:italic;font-weight:300;font-display:swap;src:url(assets/fonts/dmsans-italic-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 500;font-display:swap;src:url(assets/fonts/dmsans-normal-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:300 500;font-display:swap;src:url(assets/fonts/dmsans-normal-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:'Syne';font-style:normal;font-weight:400 800;font-display:swap;src:url(assets/fonts/syne-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:'Syne';font-style:normal;font-weight:400 800;font-display:swap;src:url(assets/fonts/syne-latin.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+.visually-hidden{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+.pied-forge{line-height:1.7;}
+.pied-forge a{color:inherit;text-decoration:underline;}
+.pied-forge a:focus-visible{outline:3px solid currentColor;outline-offset:2px;}
+  </style>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Révisions 4ème - Mathématiques</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<title>Révisions 4ème · Préparer le passage en 3ème</title>
 <style>
 
 :root{--bg:#0f1117;--surface:#1a1d27;--surface2:#22263a;--border:#2e3350;--accent:#4f8cff;--accent2:#7c5cfc;--green:#3dd68c;--red:#ff5c5c;--orange:#ffb347;--text:#e8eaf6;--muted:#8892b0;--card:#1e2235;--radius:14px;}
@@ -274,8 +292,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   <div class="section-label">Chapitres</div>
   <div class="chap-grid" id="chap-grid"></div>
   <div style="margin-top:36px;padding-top:18px;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted);text-align:center;line-height:1.8;">
-    Conçu par <strong style="color:var(--text)">Philippe Auria</strong> · Collège Fernand Donatien · Fort-de-France<br>Révisions 4ème → 3ème · 2026
-  </div>
+    <span class="pied-forge"><a href="https://forge.apps.education.fr/auriaphilippe/Revisions_passage_en_3eme" target="_blank" rel="noopener noreferrer">Révisions 4ème<span class="visually-hidden"> (nouvelle fenêtre)</span></a> par <a href="mailto:philippe.auria@ac-martinique.fr">Philippe Auria</a> · sous licence <a href="https://www.gnu.org/licenses/gpl-3.0.fr.html" target="_blank" rel="noopener noreferrer">GNU GPL v3<span class="visually-hidden"> (nouvelle fenêtre)</span></a> · un commun de la <a href="https://forge.apps.education.fr" target="_blank" rel="noopener noreferrer">Forge des Communs Numériques Éducatifs<span class="visually-hidden"> (nouvelle fenêtre)</span></a><br>Collège Fernand Donatien · Fort-de-France · <a href="https://forge.apps.education.fr/auriaphilippe/Revisions_passage_en_3eme/-/tree/main" target="_blank" rel="noopener noreferrer">Code source<span class="visually-hidden"> (nouvelle fenêtre)</span></a> · <a href="https://forge.apps.education.fr/auriaphilippe/Revisions_passage_en_3eme/-/issues" target="_blank" rel="noopener noreferrer">Suggérer et signaler<span class="visually-hidden"> (nouvelle fenêtre)</span></a> · <a href="https://auriaphilippe.forge.apps.education.fr/Revisions_passage_en_3eme/mentions-legales.html" target="_blank" rel="noopener noreferrer">Mentions légales<span class="visually-hidden"> (nouvelle fenêtre)</span></a> · <a href="https://auriaphilippe.forge.apps.education.fr/Revisions_passage_en_3eme/accessibilite.html" target="_blank" rel="noopener noreferrer">Accessibilité : non conforme<span class="visually-hidden"> (nouvelle fenêtre)</span></a></span></div>
 </div>
 
 <div class="screen" id="screen-chap1">
