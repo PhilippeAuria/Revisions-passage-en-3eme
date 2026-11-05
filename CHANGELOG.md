@@ -8,7 +8,6 @@ Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Les
 - Pied de page avec auteur, licence GNU GPL v3, appartenance à la Forge des Communs Numériques Éducatifs, code source et tickets.
 - Pages `mentions-legales.html` et `accessibilite.html` (déclaration « non conforme » tant qu'aucun audit n'est fait).
 - Fichiers `SECURITY.md` et `CHANGELOG.md`, README complété.
-- Mention de l'aide de l'IA à la conception du code.
 - Icône du site et balises de description.
 
 ### Modifié

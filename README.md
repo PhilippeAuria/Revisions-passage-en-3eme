@@ -40,10 +40,6 @@ Aucun compte, aucun cookie, aucune mesure d'audience, aucun serveur. Le navigate
 
 Aucune bibliothèque ni police chargée depuis un site tiers, aucune requête réseau, pas d'`eval`. Le détail, les limites de GitLab Pages et la façon de signaler une faille sont dans [SECURITY.md](SECURITY.md).
 
-## Conception et IA
-
-Le code a été écrit avec l'aide de Claude (Anthropic), puis relu, testé et maintenu par Philippe Auria. L'application n'appelle aucune intelligence artificielle et n'envoie aucune donnée. Les questions et corrections sont produites par des règles écrites à la main, mais doivent rester relues par l'enseignant.
-
 ## Lancer en local / publier
 
 - En local : ouvrir `index.html` dans un navigateur.
