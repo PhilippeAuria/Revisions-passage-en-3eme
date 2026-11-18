@@ -38,7 +38,7 @@ Aucun compte, aucun cookie, aucune mesure d'audience, aucun serveur. Le navigate
 
 ## Sécurité
 
-Aucune bibliothèque ni police chargée depuis un site tiers, aucune requête réseau, pas d'`eval`. Le détail, les limites de GitLab Pages et la façon de signaler une faille sont dans [SECURITY.md](SECURITY.md).
+Aucune bibliothèque ni police chargée depuis un site tiers, aucune requête réseau, pas d'`eval`, politique de sécurité du contenu (CSP) stricte et aucun gestionnaire `onclick` en ligne. Le détail, les limites de GitLab Pages et la façon de signaler une faille sont dans [SECURITY.md](SECURITY.md).
 
 ## Lancer en local / publier
 

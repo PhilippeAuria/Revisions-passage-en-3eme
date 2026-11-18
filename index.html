@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+  <!-- Sécurité : seul le script de cette page s'exécute (empreinte SHA-256), aucune connexion réseau. Détails : SECURITY.md. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-NLJjQHyIj3U8I5T49HCLQy74nQ0nkpflLvn2T+asaOg='; style-src 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'none'; manifest-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="Révisions 4ème : réviser en autonomie les mathématiques de 4ème par chapitre, avec rappels de cours, QCM et exercices auto-corrigés, pour préparer le passage en 3ème.">
@@ -277,8 +279,8 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <header>
   <div class="logo">AutoRévisions<span>4ème</span></div>
   <div class="header-right">
-    <button class="btn-reset" onclick="confirmResetProgress()" title="Réinitialiser la progression">↺</button>
-    <button class="btn-theme" onclick="toggleTheme()"><span id="theme-icon">🌙</span><span id="theme-label">Fond sombre</span></button>
+    <button class="btn-reset" data-onclick="confirmResetProgress" title="Réinitialiser la progression">↺</button>
+    <button class="btn-theme" data-onclick="toggleTheme"><span id="theme-icon">🌙</span><span id="theme-label">Fond sombre</span></button>
     <div class="header-info">Mathématiques · 4ème → 3ème<br>Révisions 2026</div>
   </div>
 </header>
@@ -299,7 +301,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Nombres relatifs - les 4 opérations</div>
         <div class="chap-header-sub">Chapitre 1 · 5 exercices</div>
@@ -316,43 +318,43 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" id="tbtn-cours-ch1" onclick="showTab_ch1('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" id="tbtn-qcm-ch1" onclick="showTab_ch1('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" id="tbtn-exercices-ch1" onclick="showTab_ch1('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" id="tbtn-cours-ch1" data-onclick="showTab_ch1" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" id="tbtn-qcm-ch1" data-onclick="showTab_ch1" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" id="tbtn-exercices-ch1" data-onclick="showTab_ch1" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
   <div id="tab-cours-ch1">
 
     <div class="tuile-grid" id="tuile-grid-ch1">
-      <div class="tuile t1" onclick="showCoursTuile_ch1(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch1" data-args='[1]'>
         <span class="tuile-icon">↔</span>
         <span class="tuile-label">La droite des nombres</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch1(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch1" data-args='[2]'>
         <span class="tuile-icon">+/−</span>
         <span class="tuile-label">Addition de relatifs</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch1(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch1" data-args='[3]'>
         <span class="tuile-icon">↔</span>
         <span class="tuile-label">Nombres opposés</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch1(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch1" data-args='[4]'>
         <span class="tuile-icon">×</span>
         <span class="tuile-label">Multiplication</span>
       </div>
-      <div class="tuile t5" onclick="showCoursTuile_ch1(5)">
+      <div class="tuile t5" data-onclick="showCoursTuile_ch1" data-args='[5]'>
         <span class="tuile-icon">÷</span>
         <span class="tuile-label">Division</span>
       </div>
-      <div class="tuile t6" onclick="showCoursTuile_ch1(6)">
+      <div class="tuile t6" data-onclick="showCoursTuile_ch1" data-args='[6]'>
         <span class="tuile-icon">📏</span>
         <span class="tuile-label">Priorités opératoires</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch1-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch1()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch1">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">↔</span> La droite des nombres</div>
       <div class="rule-block">
@@ -372,7 +374,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch1-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch1()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch1">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">+/−</span> Addition de nombres relatifs</div>
 
@@ -446,7 +448,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch1-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch1()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch1">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">↔</span> Nombres opposés</div>
       <div class="thm-box">
@@ -466,7 +468,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch1-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch1()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch1">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&times;</span> Multiplication</div>
 
@@ -543,7 +545,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch1-5">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch1()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch1">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&divide;</span> Division</div>
 
@@ -635,7 +637,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch1-6">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch1()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch1">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">📏</span> Priorités opératoires</div>
       <div class="rule-block">
@@ -700,9 +702,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>E =</strong>&nbsp;&minus;2 + 9 &minus; (&minus;1)</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch1(this,'corr-1-ch1')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch1(1,true)">✓ J&apos;ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch1(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch1" data-args='["@this","corr-1-ch1"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch1" data-args='[1,true]'>✓ J&apos;ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch1" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-1-ch1" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -743,9 +745,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>E =</strong>&nbsp;(&minus;5)<span class="exp">2</span>&nbsp;&nbsp;&nbsp;&nbsp; <strong>F =</strong>&nbsp;&minus;5<span class="exp">2</span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch1(this,'corr-2-ch1')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch1(2,true)">✓ J&apos;ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch1(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch1" data-args='["@this","corr-2-ch1"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch1" data-args='[2,true]'>✓ J&apos;ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch1" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-2-ch1" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -789,9 +791,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch1(this,'corr-3-ch1')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch1(3,true)">✓ J&apos;ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch1(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch1" data-args='["@this","corr-3-ch1"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch1" data-args='[3,true]'>✓ J&apos;ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch1" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-3-ch1" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -830,9 +832,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>D =</strong>&nbsp;&minus;2 &times; [4 &minus; (&minus;3)] + 10 &divide; (&minus;5)</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch1(this,'corr-4-ch1')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch1(4,true)">✓ J&apos;ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch1(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch1" data-args='["@this","corr-4-ch1"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch1" data-args='[4,true]'>✓ J&apos;ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch1" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-4-ch1" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -907,9 +909,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3)</strong> Calculer la température moyenne sur la semaine (donner une valeur approchée au dixième).</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch1(this,'corr-5-ch1')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch1(5,true)">✓ J&apos;ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch1(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch1" data-args='["@this","corr-5-ch1"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch1" data-args='[5,true]'>✓ J&apos;ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch1" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-5-ch1" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -949,7 +951,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Théorème de Pythagore et sa réciproque</div>
         <div class="chap-header-sub">Chapitre 2 · 5 exercices</div>
@@ -966,35 +968,35 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" id="tbtn-cours-ch2" onclick="showTab_ch2('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" id="tbtn-qcm-ch2" onclick="showTab_ch2('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" id="tbtn-exercices-ch2" onclick="showTab_ch2('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" id="tbtn-cours-ch2" data-onclick="showTab_ch2" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" id="tbtn-qcm-ch2" data-onclick="showTab_ch2" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" id="tbtn-exercices-ch2" data-onclick="showTab_ch2" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
   <div id="tab-cours-ch2">
 
     <div class="tuile-grid" id="tuile-grid-ch2">
-      <div class="tuile t1" onclick="showCoursTuile_ch2(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch2" data-args='[1]'>
         <span class="tuile-icon">📐</span>
         <span class="tuile-label">Triangle rectangle</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch2(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch2" data-args='[2]'>
         <span class="tuile-icon">📏</span>
         <span class="tuile-label">Théorème de Pythagore</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch2(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch2" data-args='[3]'>
         <span class="tuile-icon">√</span>
         <span class="tuile-label">La racine carrée</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch2(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch2" data-args='[4]'>
         <span class="tuile-icon">🔄</span>
         <span class="tuile-label">Réciproque de Pythagore</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch2-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch2()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch2">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">📐</span> Triangle rectangle - vocabulaire</div>
 
@@ -1024,7 +1026,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch2-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch2()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch2">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">📏</span> Théorème de Pythagore</div>
 
@@ -1068,7 +1070,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch2-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch2()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch2">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">√</span> La racine carrée</div>
 
@@ -1171,7 +1173,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch2-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch2()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch2">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">🔄</span> Réciproque du théorème de Pythagore</div>
       <!-- Encadré réciproque + figure ensemble -->
@@ -1276,9 +1278,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
       </div>
       <div class="fig-svg-wrap" id="fig-ex1-ch2"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;">
-        <button class="corr-btn" onclick="toggleCorr_ch2(this,'corr-1-ch2')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch2(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch2(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch2" data-args='["@this","corr-1-ch2"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch2" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch2" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-1-ch2" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1309,9 +1311,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
       </div>
       <div class="fig-svg-wrap" id="fig-ex2-ch2"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;">
-        <button class="corr-btn" onclick="toggleCorr_ch2(this,'corr-2-ch2')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch2(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch2(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch2" data-args='["@this","corr-2-ch2"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch2" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch2" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-2-ch2" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1343,9 +1345,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
       </div>
       <div class="fig-svg-wrap" id="fig-ex3-ch2"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;">
-        <button class="corr-btn" onclick="toggleCorr_ch2(this,'corr-3-ch2')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch2(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch2(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch2" data-args='["@this","corr-3-ch2"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch2" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch2" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-3-ch2" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1376,9 +1378,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
       </div>
       <div class="fig-svg-wrap" id="fig-ex4-ch2"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;">
-        <button class="corr-btn" onclick="toggleCorr_ch2(this,'corr-4-ch2')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch2(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch2(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch2" data-args='["@this","corr-4-ch2"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch2" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch2" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-4-ch2" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1410,9 +1412,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
       </div>
       <div class="fig-svg-wrap" id="fig-ex5-ch2"></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;">
-        <button class="corr-btn" onclick="toggleCorr_ch2(this,'corr-5-ch2')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch2(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch2(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch2" data-args='["@this","corr-5-ch2"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch2" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch2" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-5-ch2" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1441,7 +1443,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Arithmétique et nombres premiers</div>
         <div class="chap-header-sub">Chapitre 3 · 5 exercices</div>
@@ -1458,39 +1460,39 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" id="tbtn-cours-ch3" onclick="showTab_ch3('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" id="tbtn-qcm-ch3" onclick="showTab_ch3('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" id="tbtn-exercices-ch3" onclick="showTab_ch3('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" id="tbtn-cours-ch3" data-onclick="showTab_ch3" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" id="tbtn-qcm-ch3" data-onclick="showTab_ch3" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" id="tbtn-exercices-ch3" data-onclick="showTab_ch3" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
   <div id="tab-cours-ch3">
 
     <div class="tuile-grid" id="tuile-grid-ch3">
-      <div class="tuile t1" onclick="showCoursTuile_ch3(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch3" data-args='[1]'>
         <span class="tuile-icon">ℕ</span>
         <span class="tuile-label">Les entiers naturels</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch3(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch3" data-args='[2]'>
         <span class="tuile-icon">÷</span>
         <span class="tuile-label">Division euclidienne</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch3(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch3" data-args='[3]'>
         <span class="tuile-icon">✓</span>
         <span class="tuile-label">Diviseurs et multiples</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch3(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch3" data-args='[4]'>
         <span class="tuile-icon">★</span>
         <span class="tuile-label">Nombres premiers</span>
       </div>
-      <div class="tuile t5" onclick="showCoursTuile_ch3(5)">
+      <div class="tuile t5" data-onclick="showCoursTuile_ch3" data-args='[5]'>
         <span class="tuile-icon">📋</span>
         <span class="tuile-label">Décomposition en facteurs premiers</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch3-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch3()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch3">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">ℕ</span> Les entiers naturels</div>
       <div class="def-box">
@@ -1508,7 +1510,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch3-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch3()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch3">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">÷</span> La division euclidienne</div>
 
@@ -1544,7 +1546,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch3-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch3()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch3">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">✓</span> Diviseurs et multiples</div>
       <div class="def-box">
@@ -1585,7 +1587,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch3-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch3()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch3">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">★</span> Nombres premiers</div>
       <div class="def-box">
@@ -1619,7 +1621,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch3-5">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch3()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch3">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">📋</span> Décomposition en facteurs premiers</div>
       <div class="thm-box">
@@ -1675,9 +1677,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>c.</strong> 1 008</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch3(this,'corr-1-ch3')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch3(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch3(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch3" data-args='["@this","corr-1-ch3"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch3" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch3" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-1-ch3" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1722,9 +1724,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item">29 &nbsp;·&nbsp; 51 &nbsp;·&nbsp; 97 &nbsp;·&nbsp; 1</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch3(this,'corr-2-ch3')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch3(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch3(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch3" data-args='["@this","corr-2-ch3"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch3" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch3" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-2-ch3" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1776,9 +1778,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>c.</strong> 1 050</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch3(this,'corr-3-ch3')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch3(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch3(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch3" data-args='["@this","corr-3-ch3"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch3" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch3" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-3-ch3" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1822,9 +1824,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch3(this,'corr-4-ch3')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch3(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch3(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch3" data-args='["@this","corr-4-ch3"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch3" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch3" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-4-ch3" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1875,9 +1877,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> En déduire le nombre maximum de lots et la composition de chaque lot.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-        <button class="corr-btn" onclick="toggleCorr_ch3(this,'corr-5-ch3')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch3(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch3(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch3" data-args='["@this","corr-5-ch3"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch3" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch3" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="corr-5-ch3" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -1914,7 +1916,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap4">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Les 4 opérations avec les nombres rationnels</div>
         <div class="chap-header-sub">Chapitre 4 · 5 exercices</div>
@@ -1931,39 +1933,39 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch4('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch4('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch4('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch4" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch4" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch4" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
   <div id="tab-cours-ch4">
 
     <div class="tuile-grid" id="tuile-grid-ch4">
-      <div class="tuile t1" onclick="showCoursTuile_ch4(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch4" data-args='[1]'>
         <span class="tuile-icon">ℚ</span>
         <span class="tuile-label">Les nombres rationnels</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch4(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch4" data-args='[2]'>
         <span class="tuile-icon">+/−</span>
         <span class="tuile-label">Addition et soustraction</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch4(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch4" data-args='[3]'>
         <span class="tuile-icon">×</span>
         <span class="tuile-label">Multiplication</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch4(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch4" data-args='[4]'>
         <span class="tuile-icon">÷</span>
         <span class="tuile-label">Division</span>
       </div>
-      <div class="tuile t5" onclick="showCoursTuile_ch4(5)">
+      <div class="tuile t5" data-onclick="showCoursTuile_ch4" data-args='[5]'>
         <span class="tuile-icon">📐</span>
         <span class="tuile-label">Priorités opératoires</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch4-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch4()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch4">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">ℚ</span> Les nombres rationnels</div>
 
@@ -2043,7 +2045,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch4-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch4()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch4">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">+/−</span> Addition et soustraction</div>
 
@@ -2138,7 +2140,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch4-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch4()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch4">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">×</span> Multiplication</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -2215,7 +2217,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch4-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch4()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch4">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">÷</span> Division</div>
 
@@ -2314,7 +2316,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch4-5">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch4()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch4">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">📐</span> Priorités opératoires et expressions mixtes</div>
       <div class="rule-block">
@@ -2492,9 +2494,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch4(this,'c-1-ch4')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch4(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch4(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch4" data-args='["@this","c-1-ch4"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch4" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch4" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch4" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -2569,9 +2571,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch4(this,'c-2-ch4')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch4(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch4(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch4" data-args='["@this","c-2-ch4"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch4" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch4" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch4" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -2642,9 +2644,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch4(this,'c-3-ch4')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch4(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch4(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch4" data-args='["@this","c-3-ch4"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch4" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch4" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch4" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -2722,9 +2724,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch4(this,'c-4-ch4')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch4(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch4(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch4" data-args='["@this","c-4-ch4"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch4" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch4" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch4" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -2813,9 +2815,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> Le pâtissier dispose de <strong>6 litres</strong> de lait. Combien de gâteaux complets peut-il réaliser avec ce lait ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch4(this,'c-5-ch4')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch4(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch4(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch4" data-args='["@this","c-5-ch4"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch4" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch4" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch4" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -2864,7 +2866,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap5">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Puissances et calcul numérique</div>
         <div class="chap-header-sub">Chapitre 5 · 5 exercices</div>
@@ -2881,43 +2883,43 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch5('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch5('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch5('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch5" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch5" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch5" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
   <div id="tab-cours-ch5">
 
     <div class="tuile-grid" id="tuile-grid-ch5">
-      <div class="tuile t1" onclick="showCoursTuile_ch5(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch5" data-args='[1]'>
         <span class="tuile-icon">aⁿ</span>
         <span class="tuile-label">Définition d'une puissance</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch5(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch5" data-args='[2]'>
         <span class="tuile-icon">±</span>
         <span class="tuile-label">Puissances négatives</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch5(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch5" data-args='[3]'>
         <span class="tuile-icon">≡</span>
         <span class="tuile-label">Propriétés des puissances</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch5(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch5" data-args='[4]'>
         <span class="tuile-icon">a⁰</span>
         <span class="tuile-label">Exposants 0, 1 et négatifs</span>
       </div>
-      <div class="tuile t5" onclick="showCoursTuile_ch5(5)">
+      <div class="tuile t5" data-onclick="showCoursTuile_ch5" data-args='[5]'>
         <span class="tuile-icon">10ⁿ</span>
         <span class="tuile-label">Puissances de 10</span>
       </div>
-      <div class="tuile t6" onclick="showCoursTuile_ch5(6)">
+      <div class="tuile t6" data-onclick="showCoursTuile_ch5" data-args='[6]'>
         <span class="tuile-icon">×10</span>
         <span class="tuile-label">Écriture scientifique</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch5-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch5()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch5">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">a<span class="exp">n</span></span> Définition d'une puissance</div>
       <div class="def-box">
@@ -2947,7 +2949,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch5-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch5()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch5">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&plusmn;</span> Puissances d'un nombre négatif</div>
       <div class="rule-block">
@@ -2971,7 +2973,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch5-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch5()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch5">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&equiv;</span> Propriétés des puissances</div>
       <div class="rule-block">
@@ -3010,7 +3012,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch5-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch5()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch5">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">a<span class="exp">0</span></span> Exposants 0, 1 et négatifs</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -3052,7 +3054,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch5-5">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch5()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch5">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">10<span class="exp">n</span></span> Puissances de 10</div>
       <div class="rule-block">
@@ -3095,7 +3097,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch5-6">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch5()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch5">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&times;10</span> Écriture scientifique</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -3176,9 +3178,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>e.</strong> &minus;5<span class="exp">2</span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch5(this,'c-1-ch5')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch5(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch5(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch5" data-args='["@this","c-1-ch5"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch5" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch5" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch5" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3220,9 +3222,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>e.</strong> (4 &times; 3)<span class="exp">2</span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch5(this,'c-2-ch5')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch5(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch5(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch5" data-args='["@this","c-2-ch5"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch5" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch5" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch5" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3261,9 +3263,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>e.</strong> <span class="f"><span class="n">1</span><span class="d">10<span class="exp">4</span></span></span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch5(this,'c-3-ch5')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch5(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch5(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch5" data-args='["@this","c-3-ch5"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch5" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch5" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch5" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3306,9 +3308,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>d.</strong> 0,003</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch5(this,'c-4-ch5')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch5(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch5(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch5" data-args='["@this","c-4-ch5"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch5" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch5" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch5" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3343,9 +3345,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> Calculer A = (2 &times; 10<span class="exp">5</span>) &times; (3 &times; 10<span class="exp">&minus;2</span>) et donner le résultat en écriture scientifique.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch5(this,'c-5-ch5')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch5(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch5(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch5" data-args='["@this","c-5-ch5"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch5" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch5" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch5" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3373,7 +3375,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap6">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Proportionnalité</div>
         <div class="chap-header-sub">Chapitre 6 · 5 exercices</div>
@@ -3390,47 +3392,47 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch6('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch6('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch6('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch6" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch6" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch6" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
 <div id="tab-cours-ch6">
 
     <div class="tuile-grid" id="tuile-grid-ch6">
-      <div class="tuile t1" onclick="showCoursTuile_ch6(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch6" data-args='[1]'>
         <span class="tuile-icon">k</span>
         <span class="tuile-label">Proportionnalité</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch6(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch6" data-args='[2]'>
         <span class="tuile-icon">□</span>
         <span class="tuile-label">Représentation graphique</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch6(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch6" data-args='[3]'>
         <span class="tuile-icon">?</span>
         <span class="tuile-label">Reconnaître une situation</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch6(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch6" data-args='[4]'>
         <span class="tuile-icon">×</span>
         <span class="tuile-label">Produit en croix</span>
       </div>
-      <div class="tuile t5" onclick="showCoursTuile_ch6(5)">
+      <div class="tuile t5" data-onclick="showCoursTuile_ch6" data-args='[5]'>
         <span class="tuile-icon">%</span>
         <span class="tuile-label">Pourcentages</span>
       </div>
-      <div class="tuile t6" onclick="showCoursTuile_ch6(6)">
+      <div class="tuile t6" data-onclick="showCoursTuile_ch6" data-args='[6]'>
         <span class="tuile-icon">v</span>
         <span class="tuile-label">Vitesse moyenne</span>
       </div>
-      <div class="tuile t7" onclick="showCoursTuile_ch6(7)">
+      <div class="tuile t7" data-onclick="showCoursTuile_ch6" data-args='[7]'>
         <span class="tuile-icon">▭</span>
         <span class="tuile-label">Échelle</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">k</span> Tableau de proportionnalité</div>
       <div class="def-box">
@@ -3466,7 +3468,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9636;</span> Représentation graphique</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -3561,7 +3563,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">?</span> Reconnaître une situation de proportionnalité</div>
       <div class="rule-block">
@@ -3609,7 +3611,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&times;</span> Produit en croix</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -3665,7 +3667,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-5">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">%</span> Pourcentages</div>
       <div class="def-box">
@@ -3724,7 +3726,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-6">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">v</span> Vitesse moyenne</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -3757,7 +3759,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch6-7">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch6()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch6">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9633;</span> Échelle d'un plan ou d'une carte</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -3837,9 +3839,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch6(this,'c-1-ch6')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch6(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch6(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch6" data-args='["@this","c-1-ch6"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch6" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch6" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch6" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3873,9 +3875,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
       </div>
       <div class="ex-body"><p>Une recette pour 4 personnes nécessite 250 g de riz. Calculer la quantité de riz nécessaire pour 10 personnes, en utilisant un produit en croix.</p></div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch6(this,'c-2-ch6')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch6(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch6(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch6" data-args='["@this","c-2-ch6"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch6" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch6" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch6" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3929,9 +3931,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>c.</strong> Un article coûte maintenant 90 € après une augmentation de 20 %. Quel était son prix avant l'augmentation ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch6(this,'c-3-ch6')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch6(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch6(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch6" data-args='["@this","c-3-ch6"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch6" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch6" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch6" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -3968,9 +3970,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>b.</strong> En roulant à cette même vitesse, combien de temps lui faudra-t-il pour parcourir 100 km ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch6(this,'c-4-ch6')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch6(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch6(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch6" data-args='["@this","c-4-ch6"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch6" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch6" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch6" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4003,9 +4005,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> Le jardin possède une allée. Sur le plan, sa longueur mesure 5 cm et un sac de gravier permet de couvrir 2 m d'allée réelle. Combien de sacs de gravier faut-il acheter pour couvrir toute l'allée ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch6(this,'c-5-ch6')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch6(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch6(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch6" data-args='["@this","c-5-ch6"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch6" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch6" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch6" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4038,7 +4040,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap7">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Théorème de Thalès et réciproque</div>
         <div class="chap-header-sub">Chapitre 7 · 5 exercices</div>
@@ -4055,35 +4057,35 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch7('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch7('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch7('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch7" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch7" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch7" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
 <div id="tab-cours-ch7">
 
     <div class="tuile-grid" id="tuile-grid-ch7">
-      <div class="tuile t1" onclick="showCoursTuile_ch7(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch7" data-args='[1]'>
         <span class="tuile-icon">▲</span>
         <span class="tuile-label">Configuration de Thalès</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch7(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch7" data-args='[2]'>
         <span class="tuile-icon">∥</span>
         <span class="tuile-label">Théorème de Thalès</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch7(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch7" data-args='[3]'>
         <span class="tuile-icon">✏</span>
         <span class="tuile-label">Calculer une longueur</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch7(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch7" data-args='[4]'>
         <span class="tuile-icon">↔</span>
         <span class="tuile-label">Réciproque de Thalès</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch7-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch7()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch7">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9651;</span> Configuration de Thalès</div>
       <div class="def-box">
@@ -4121,7 +4123,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch7-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch7()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch7">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#8741;</span> Théorème de Thalès</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -4144,7 +4146,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch7-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch7()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch7">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9998;</span> Méthode - Calculer une longueur</div>
       <div class="rule-block">
@@ -4213,7 +4215,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch7-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch7()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch7">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#8596;</span> Réciproque du théorème de Thalès</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -4316,9 +4318,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch7(this,'c-1-ch7')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch7(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch7(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch7" data-args='["@this","c-1-ch7"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch7" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch7" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch7" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4382,9 +4384,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch7(this,'c-2-ch7')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch7(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch7(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch7" data-args='["@this","c-2-ch7"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch7" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch7" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch7" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4450,9 +4452,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch7(this,'c-3-ch7')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch7(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch7(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch7" data-args='["@this","c-3-ch7"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch7" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch7" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch7" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4518,9 +4520,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch7(this,'c-4-ch7')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch7(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch7(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch7" data-args='["@this","c-4-ch7"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch7" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch7" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch7" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4584,9 +4586,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch7(this,'c-5-ch7')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch7(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch7(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch7" data-args='["@this","c-5-ch7"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch7" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch7" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch7" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4627,7 +4629,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap8">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Calcul littéral</div>
         <div class="chap-header-sub">Chapitre 8 · 5 exercices</div>
@@ -4644,35 +4646,35 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch8('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch8('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch8('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch8" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch8" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch8" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
 <div id="tab-cours-ch8">
 
     <div class="tuile-grid" id="tuile-grid-ch8">
-      <div class="tuile t1" onclick="showCoursTuile_ch8(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch8" data-args='[1]'>
         <span class="tuile-icon">x</span>
         <span class="tuile-label">Expressions littérales</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch8(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch8" data-args='[2]'>
         <span class="tuile-icon">▷</span>
         <span class="tuile-label">Développer</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch8(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch8" data-args='[3]'>
         <span class="tuile-icon">▽</span>
         <span class="tuile-label">Factoriser</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch8(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch8" data-args='[4]'>
         <span class="tuile-icon">?</span>
         <span class="tuile-label">Tester une égalité</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch8-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch8()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch8">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">x</span> Expressions littérales</div>
       <div class="def-box">
@@ -4739,7 +4741,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch8-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch8()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch8">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9655;</span> Développer une expression</div>
       <div class="rule-block">
@@ -4775,7 +4777,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch8-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch8()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch8">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9663;</span> Factoriser une expression</div>
       <div class="rule-block">
@@ -4812,7 +4814,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch8-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch8()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch8">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">?</span> Tester une égalité</div>
       <div class="rule-block">
@@ -4876,9 +4878,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>d.</strong> D = 5x &minus; 2(3x + 1)</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch8(this,'c-1-ch8')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch8(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch8(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch8" data-args='["@this","c-1-ch8"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch8" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch8" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch8" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4925,9 +4927,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch8(this,'c-2-ch8')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch8(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch8(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch8" data-args='["@this","c-2-ch8"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch8" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch8" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch8" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -4987,9 +4989,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>d.</strong> D = (2x &minus; 3)(x + 5) &minus; (2x &minus; 3)</div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch8(this,'c-3-ch8')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch8(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch8(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch8" data-args='["@this","c-3-ch8"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch8" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch8" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch8" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5060,9 +5062,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> Le résultat peut-il être égal à 4 ? Tester pour x = 0, puis pour x = &minus;4.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch8(this,'c-4-ch8')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch8(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch8(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch8" data-args='["@this","c-4-ch8"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch8" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch8" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch8" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5127,9 +5129,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch8(this,'c-5-ch8')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch8(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch8(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch8" data-args='["@this","c-5-ch8"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch8" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch8" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch8" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5180,7 +5182,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap9">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Probabilités</div>
         <div class="chap-header-sub">Chapitre 9 · 5 exercices</div>
@@ -5197,27 +5199,27 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch9('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch9('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch9('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch9" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch9" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch9" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
 <div id="tab-cours-ch9">
 
     <div class="tuile-grid" id="tuile-grid-ch9">
-      <div class="tuile t1" onclick="showCoursTuile_ch9(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch9" data-args='[1]'>
         <span class="tuile-icon">🎲</span>
         <span class="tuile-label">Vocabulaire</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch9(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch9" data-args='[2]'>
         <span class="tuile-icon">P</span>
         <span class="tuile-label">Probabilité d'un événement</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch9-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch9()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch9">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#127922;</span> Vocabulaire</div>
       <div class="def-box">
@@ -5250,7 +5252,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch9-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch9()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch9">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">P</span> Probabilité d'un événement</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -5319,9 +5321,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>2.</strong> On change la règle : il y a maintenant cinq gobelets, et deux billes sont cachées sous deux gobelets différents. Léa a-t-elle plus de chances de trouver une bille dans cette nouvelle règle ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch9(this,'c-1-ch9')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch9(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch9(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch9" data-args='["@this","c-1-ch9"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch9" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch9" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch9" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5363,9 +5365,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p>Calculer p(C).</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch9(this,'c-2-ch9')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch9(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch9(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch9" data-args='["@this","c-2-ch9"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch9" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch9" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch9" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5422,9 +5424,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch9(this,'c-3-ch9')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch9(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch9(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch9" data-args='["@this","c-3-ch9"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch9" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch9" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch9" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5504,9 +5506,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> On choisit une fille au hasard parmi les filles de la classe. Quelle est la probabilité qu'elle pratique le basket ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch9(this,'c-4-ch9')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch9(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch9(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch9" data-args='["@this","c-4-ch9"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch9" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch9" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch9" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5586,9 +5588,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>2.</strong> Quelle est la probabilité d'obtenir un nombre pair ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch9(this,'c-5-ch9')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch9(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch9(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch9" data-args='["@this","c-5-ch9"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch9" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch9" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch9" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5624,7 +5626,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap10">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Trigonométrie</div>
         <div class="chap-header-sub">Chapitre 10 · 5 exercices</div>
@@ -5641,35 +5643,35 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch10('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch10('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch10('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch10" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch10" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch10" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
 <div id="tab-cours-ch10">
 
     <div class="tuile-grid" id="tuile-grid-ch10">
-      <div class="tuile t1" onclick="showCoursTuile_ch10(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch10" data-args='[1]'>
         <span class="tuile-icon">▲</span>
         <span class="tuile-label">Triangle rectangle</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch10(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch10" data-args='[2]'>
         <span class="tuile-icon">cos</span>
         <span class="tuile-label">Cosinus d'un angle</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch10(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch10" data-args='[3]'>
         <span class="tuile-icon">✏</span>
         <span class="tuile-label">Calculer une longueur</span>
       </div>
-      <div class="tuile t4" onclick="showCoursTuile_ch10(4)">
+      <div class="tuile t4" data-onclick="showCoursTuile_ch10" data-args='[4]'>
         <span class="tuile-icon">∠</span>
         <span class="tuile-label">Calculer un angle</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch10-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch10()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch10">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9651;</span> Triangle rectangle : vocabulaire</div>
       <div class="rule-block">
@@ -5705,7 +5707,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch10-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch10()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch10">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">cos</span> Cosinus d'un angle aigu</div>
       <div style="background:rgba(124,92,252,.08);border:2.5px solid rgba(124,92,252,.5);border-radius:10px;padding:12px 16px;margin-bottom:16px;">
@@ -5750,7 +5752,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch10-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch10()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch10">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#9999;</span> Méthode - Calculer une longueur</div>
       <div class="rule-block">
@@ -5793,7 +5795,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch10-4">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch10()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch10">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">&#8736;</span> Méthode - Calculer un angle</div>
       <div class="rule-block">
@@ -5880,9 +5882,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch10(this,'c-1-ch10')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch10(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch10(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch10" data-args='["@this","c-1-ch10"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch10" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch10" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch10" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5930,9 +5932,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch10(this,'c-2-ch10')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch10(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch10(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch10" data-args='["@this","c-2-ch10"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch10" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch10" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch10" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -5981,9 +5983,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch10(this,'c-3-ch10')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch10(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch10(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch10" data-args='["@this","c-3-ch10"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch10" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch10" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch10" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6029,9 +6031,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch10(this,'c-4-ch10')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch10(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch10(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch10" data-args='["@this","c-4-ch10"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch10" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch10" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch10" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6081,9 +6083,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         </svg>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch10(this,'c-5-ch10')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch10(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch10(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch10" data-args='["@this","c-5-ch10"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch10" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch10" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch10" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6122,7 +6124,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 <div class="screen" id="screen-chap11">
   <div class="chap-header">
     <div class="chap-header-top">
-      <button class="back-btn" onclick="goHome()">← Sommaire</button>
+      <button class="back-btn" data-onclick="goHome">← Sommaire</button>
       <div class="chap-header-info">
         <div class="chap-header-title">Équations</div>
         <div class="chap-header-sub">Chapitre 11 · 5 exercices</div>
@@ -6139,31 +6141,31 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
   </div>
 
   <div class="tabs">
-    <button class="tab-btn active" onclick="showTab_ch11('cours',this)">📖 Rappel de cours</button>
-    <button class="tab-btn" onclick="showTab_ch11('qcm',this)">🎯 QCM - Vérifier</button>
-    <button class="tab-btn" onclick="showTab_ch11('exercices',this)">✏️ Exercices</button>
+    <button class="tab-btn active" data-onclick="showTab_ch11" data-args='["cours","@this"]'>📖 Rappel de cours</button>
+    <button class="tab-btn" data-onclick="showTab_ch11" data-args='["qcm","@this"]'>🎯 QCM - Vérifier</button>
+    <button class="tab-btn" data-onclick="showTab_ch11" data-args='["exercices","@this"]'>✏️ Exercices</button>
   </div>
 
   <!-- ══ COURS ══ -->
 <div id="tab-cours-ch11">
 
     <div class="tuile-grid" id="tuile-grid-ch11">
-      <div class="tuile t1" onclick="showCoursTuile_ch11(1)">
+      <div class="tuile t1" data-onclick="showCoursTuile_ch11" data-args='[1]'>
         <span class="tuile-icon">1°</span>
         <span class="tuile-label">Équation du premier degré</span>
       </div>
-      <div class="tuile t2" onclick="showCoursTuile_ch11(2)">
+      <div class="tuile t2" data-onclick="showCoursTuile_ch11" data-args='[2]'>
         <span class="tuile-icon">P</span>
         <span class="tuile-label">Propriétés</span>
       </div>
-      <div class="tuile t3" onclick="showCoursTuile_ch11(3)">
+      <div class="tuile t3" data-onclick="showCoursTuile_ch11" data-args='[3]'>
         <span class="tuile-icon">=</span>
         <span class="tuile-label">Résoudre une équation</span>
       </div>
     </div>
 
     <div class="cours-detail" id="cours-detail-ch11-1">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch11()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch11">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">1°</span> Équation du premier degré</div>
       <div class="rule-block">
@@ -6175,7 +6177,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch11-2">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch11()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch11">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">P</span> Propriétés</div>
       <div class="rule-block">
@@ -6220,7 +6222,7 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
     </div>
 
     <div class="cours-detail" id="cours-detail-ch11-3">
-      <button class="tuile-back-btn" onclick="hideCoursTuile_ch11()">← Retour aux chapitres</button>
+      <button class="tuile-back-btn" data-onclick="hideCoursTuile_ch11">← Retour aux chapitres</button>
     <div class="cours-card">
       <div class="cours-card-title"><span class="icon">=</span> Résoudre une équation</div>
       <div class="rule-block">
@@ -6306,9 +6308,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <div class="ex-item"><strong>E6.</strong> <span class="f"><span class="n">x</span><span class="d">7</span></span> = <span class="f"><span class="n">&minus;7</span><span class="d">4</span></span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch11(this,'c-1-ch11')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch11(1,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch11(1,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch11" data-args='["@this","c-1-ch11"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch11" data-args='[1,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch11" data-args='[1,false]'>✗ À retravailler</button>
       </div>
       <div id="c-1-ch11" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6366,9 +6368,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p>Quelle est la somme totale qu'ils décident de distribuer ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch11(this,'c-2-ch11')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch11(2,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch11(2,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch11" data-args='["@this","c-2-ch11"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch11" data-args='[2,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch11" data-args='[2,false]'>✗ À retravailler</button>
       </div>
       <div id="c-2-ch11" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6412,9 +6414,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> Quel nombre faut-il choisir pour que le résultat soit égal à &minus;1 ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch11(this,'c-3-ch11')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch11(3,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch11(3,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch11" data-args='["@this","c-3-ch11"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch11" data-args='[3,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch11" data-args='[3,false]'>✗ À retravailler</button>
       </div>
       <div id="c-3-ch11" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6462,9 +6464,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> En déduire les dimensions du rectangle.</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch11(this,'c-4-ch11')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch11(4,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch11(4,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch11" data-args='["@this","c-4-ch11"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch11" data-args='[4,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch11" data-args='[4,false]'>✗ À retravailler</button>
       </div>
       <div id="c-4-ch11" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6537,9 +6539,9 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
         <p><strong>3.</strong> Pour quelle valeur de x l'aire de la croix vaut-elle 15 cm<span class="exp">2</span> ?</p>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="corr-btn" onclick="toggleCorr_ch11(this,'c-5-ch11')">👁 Voir la correction</button>
-        <button class="btn-ok" onclick="markDone_ch11(5,true)">✓ J'ai réussi</button>
-        <button class="btn-ko" onclick="markDone_ch11(5,false)">✗ À retravailler</button>
+        <button class="corr-btn" data-onclick="toggleCorr_ch11" data-args='["@this","c-5-ch11"]'>👁 Voir la correction</button>
+        <button class="btn-ok" data-onclick="markDone_ch11" data-args='[5,true]'>✓ J'ai réussi</button>
+        <button class="btn-ko" data-onclick="markDone_ch11" data-args='[5,false]'>✗ À retravailler</button>
       </div>
       <div id="c-5-ch11" class="corr-panel">
         <div class="corr-label">✓ Correction</div>
@@ -6577,6 +6579,129 @@ header{width:100%;background:var(--surface);border-bottom:1px solid var(--border
 </div><!-- /screen-chap -->
 </div><!-- /container -->
 <script>
+// ═══════════════════════════════════════════════════════════
+// ACTIONS DE L'INTERFACE
+// Remplacent les attributs onclick en ligne (interdits par la politique de sécurité, voir SECURITY.md).
+// Un bouton porte data-onclick="fonction" et, s'il y a lieu, data-args='[arguments]' ("@this" désigne le bouton cliqué).
+// Chaque action appelle la même fonction, avec les mêmes arguments, qu'avant.
+// ═══════════════════════════════════════════════════════════
+const ACTIONS = {
+  confirmResetProgress: function(el, args){ confirmResetProgress(...args); },
+  goHome: function(el, args){ goHome(...args); },
+  hideCoursTuile_ch1: function(el, args){ hideCoursTuile_ch1(...args); },
+  hideCoursTuile_ch10: function(el, args){ hideCoursTuile_ch10(...args); },
+  hideCoursTuile_ch11: function(el, args){ hideCoursTuile_ch11(...args); },
+  hideCoursTuile_ch2: function(el, args){ hideCoursTuile_ch2(...args); },
+  hideCoursTuile_ch3: function(el, args){ hideCoursTuile_ch3(...args); },
+  hideCoursTuile_ch4: function(el, args){ hideCoursTuile_ch4(...args); },
+  hideCoursTuile_ch5: function(el, args){ hideCoursTuile_ch5(...args); },
+  hideCoursTuile_ch6: function(el, args){ hideCoursTuile_ch6(...args); },
+  hideCoursTuile_ch7: function(el, args){ hideCoursTuile_ch7(...args); },
+  hideCoursTuile_ch8: function(el, args){ hideCoursTuile_ch8(...args); },
+  hideCoursTuile_ch9: function(el, args){ hideCoursTuile_ch9(...args); },
+  markDone_ch1: function(el, args){ markDone_ch1(...args); },
+  markDone_ch10: function(el, args){ markDone_ch10(...args); },
+  markDone_ch11: function(el, args){ markDone_ch11(...args); },
+  markDone_ch2: function(el, args){ markDone_ch2(...args); },
+  markDone_ch3: function(el, args){ markDone_ch3(...args); },
+  markDone_ch4: function(el, args){ markDone_ch4(...args); },
+  markDone_ch5: function(el, args){ markDone_ch5(...args); },
+  markDone_ch6: function(el, args){ markDone_ch6(...args); },
+  markDone_ch7: function(el, args){ markDone_ch7(...args); },
+  markDone_ch8: function(el, args){ markDone_ch8(...args); },
+  markDone_ch9: function(el, args){ markDone_ch9(...args); },
+  openChap: function(el, args){ openChap(...args); },
+  qAns_ch10: function(el, args){ qAns_ch10(...args); },
+  qAns_ch11: function(el, args){ qAns_ch11(...args); },
+  qAns_ch4: function(el, args){ qAns_ch4(...args); },
+  qAns_ch5: function(el, args){ qAns_ch5(...args); },
+  qAns_ch6: function(el, args){ qAns_ch6(...args); },
+  qAns_ch7: function(el, args){ qAns_ch7(...args); },
+  qAns_ch8: function(el, args){ qAns_ch8(...args); },
+  qAns_ch9: function(el, args){ qAns_ch9(...args); },
+  qFin_ch10: function(el, args){ qFin_ch10(...args); },
+  qFin_ch11: function(el, args){ qFin_ch11(...args); },
+  qFin_ch4: function(el, args){ qFin_ch4(...args); },
+  qFin_ch5: function(el, args){ qFin_ch5(...args); },
+  qFin_ch6: function(el, args){ qFin_ch6(...args); },
+  qFin_ch7: function(el, args){ qFin_ch7(...args); },
+  qFin_ch8: function(el, args){ qFin_ch8(...args); },
+  qFin_ch9: function(el, args){ qFin_ch9(...args); },
+  qNext_ch10: function(el, args){ qNext_ch10(...args); },
+  qNext_ch11: function(el, args){ qNext_ch11(...args); },
+  qNext_ch4: function(el, args){ qNext_ch4(...args); },
+  qNext_ch5: function(el, args){ qNext_ch5(...args); },
+  qNext_ch6: function(el, args){ qNext_ch6(...args); },
+  qNext_ch7: function(el, args){ qNext_ch7(...args); },
+  qNext_ch8: function(el, args){ qNext_ch8(...args); },
+  qNext_ch9: function(el, args){ qNext_ch9(...args); },
+  qRestart_ch10: function(el, args){ qRestart_ch10(...args); },
+  qRestart_ch11: function(el, args){ qRestart_ch11(...args); },
+  qRestart_ch4: function(el, args){ qRestart_ch4(...args); },
+  qRestart_ch5: function(el, args){ qRestart_ch5(...args); },
+  qRestart_ch6: function(el, args){ qRestart_ch6(...args); },
+  qRestart_ch7: function(el, args){ qRestart_ch7(...args); },
+  qRestart_ch8: function(el, args){ qRestart_ch8(...args); },
+  qRestart_ch9: function(el, args){ qRestart_ch9(...args); },
+  qcmAnswer_ch1: function(el, args){ qcmAnswer_ch1(...args); },
+  qcmAnswer_ch2: function(el, args){ qcmAnswer_ch2(...args); },
+  qcmAnswer_ch3: function(el, args){ qcmAnswer_ch3(...args); },
+  qcmFinish_ch1: function(el, args){ qcmFinish_ch1(...args); },
+  qcmFinish_ch2: function(el, args){ qcmFinish_ch2(...args); },
+  qcmFinish_ch3: function(el, args){ qcmFinish_ch3(...args); },
+  qcmNext_ch1: function(el, args){ qcmNext_ch1(...args); },
+  qcmNext_ch2: function(el, args){ qcmNext_ch2(...args); },
+  qcmNext_ch3: function(el, args){ qcmNext_ch3(...args); },
+  qcmRestart_ch1: function(el, args){ qcmRestart_ch1(...args); },
+  qcmRestart_ch2: function(el, args){ qcmRestart_ch2(...args); },
+  qcmRestart_ch3: function(el, args){ qcmRestart_ch3(...args); },
+  showCoursTuile_ch1: function(el, args){ showCoursTuile_ch1(...args); },
+  showCoursTuile_ch10: function(el, args){ showCoursTuile_ch10(...args); },
+  showCoursTuile_ch11: function(el, args){ showCoursTuile_ch11(...args); },
+  showCoursTuile_ch2: function(el, args){ showCoursTuile_ch2(...args); },
+  showCoursTuile_ch3: function(el, args){ showCoursTuile_ch3(...args); },
+  showCoursTuile_ch4: function(el, args){ showCoursTuile_ch4(...args); },
+  showCoursTuile_ch5: function(el, args){ showCoursTuile_ch5(...args); },
+  showCoursTuile_ch6: function(el, args){ showCoursTuile_ch6(...args); },
+  showCoursTuile_ch7: function(el, args){ showCoursTuile_ch7(...args); },
+  showCoursTuile_ch8: function(el, args){ showCoursTuile_ch8(...args); },
+  showCoursTuile_ch9: function(el, args){ showCoursTuile_ch9(...args); },
+  showTab_ch1: function(el, args){ showTab_ch1(...args); },
+  showTab_ch10: function(el, args){ showTab_ch10(...args); },
+  showTab_ch11: function(el, args){ showTab_ch11(...args); },
+  showTab_ch2: function(el, args){ showTab_ch2(...args); },
+  showTab_ch3: function(el, args){ showTab_ch3(...args); },
+  showTab_ch4: function(el, args){ showTab_ch4(...args); },
+  showTab_ch5: function(el, args){ showTab_ch5(...args); },
+  showTab_ch6: function(el, args){ showTab_ch6(...args); },
+  showTab_ch7: function(el, args){ showTab_ch7(...args); },
+  showTab_ch8: function(el, args){ showTab_ch8(...args); },
+  showTab_ch9: function(el, args){ showTab_ch9(...args); },
+  toggleCorr_ch1: function(el, args){ toggleCorr_ch1(...args); },
+  toggleCorr_ch10: function(el, args){ toggleCorr_ch10(...args); },
+  toggleCorr_ch11: function(el, args){ toggleCorr_ch11(...args); },
+  toggleCorr_ch2: function(el, args){ toggleCorr_ch2(...args); },
+  toggleCorr_ch3: function(el, args){ toggleCorr_ch3(...args); },
+  toggleCorr_ch4: function(el, args){ toggleCorr_ch4(...args); },
+  toggleCorr_ch5: function(el, args){ toggleCorr_ch5(...args); },
+  toggleCorr_ch6: function(el, args){ toggleCorr_ch6(...args); },
+  toggleCorr_ch7: function(el, args){ toggleCorr_ch7(...args); },
+  toggleCorr_ch8: function(el, args){ toggleCorr_ch8(...args); },
+  toggleCorr_ch9: function(el, args){ toggleCorr_ch9(...args); },
+  toggleTheme: function(el, args){ toggleTheme(...args); },
+  openChapStop: function(el, args, ev){ ev.stopPropagation(); openChap(...args); },
+};
+document.addEventListener('click', ev=>{
+  for(let el=ev.target; el && el.nodeType===1; el=el.parentElement){
+    const key=el.getAttribute('data-onclick');
+    if(key && ACTIONS[key]){
+      const args=JSON.parse(el.getAttribute('data-args')||'[]').map(a=>a==='@this'?el:a);
+      ACTIONS[key](el, args, ev);
+      if(ev.cancelBubble) break;
+    }
+  }
+});
+
 
 // ══════════════════════════════════
 // GLOBAL - partagé par tous les chapitres
@@ -6651,14 +6776,14 @@ function renderContinue(p){
     var ch=item.ch,pr=item.pr;
     var dots='';
     for(var i=0;i<ch.ex;i++){dots+='<span class="dot'+(i<pr.doneEx?' filled':'')+'"></span>';}
-    return '<div class="resume-row" style="--row-accent:var(--c-'+ch.c+')" onclick="openChap('+ch.id+')">'
+    return '<div class="resume-row" style="--row-accent:var(--c-'+ch.c+')" data-onclick="openChap" data-args="['+ch.id+']">'
       +'<div class="resume-icon">'+ICONS[ch.icon]+'</div>'
       +'<div class="resume-body">'
       +'<div class="resume-title">Chapitre '+ch.id+' · '+ch.title+'</div>'
       +'<div class="resume-meta">'+pr.doneEx+'/'+ch.ex+' exercices · QCM '+(pr.best?pr.best+'/5':'-')+'</div>'
       +'</div>'
       +'<div class="resume-dots">'+dots+'</div>'
-      +'<button class="resume-btn" type="button" onclick="event.stopPropagation();openChap('+ch.id+')">Continuer →</button>'
+      +'<button class="resume-btn" type="button" data-onclick="openChapStop" data-args="['+ch.id+']">Continuer →</button>'
       +'</div>';
   }).join('');
   slot.innerHTML='<div class="section-label">À reprendre</div><div class="resume-list">'+rows+'</div>';
@@ -6701,7 +6826,7 @@ function buildSommaire(){
     var pr=chapProgress(ch,p);
     var done=ch.available&&pr.doneEx===ch.ex;
     var accentStyle=ch.available?' style="--chap-accent:var(--c-'+ch.c+');--chap-accent-soft:var(--c-'+ch.c+'-soft)"':'';
-    var html='<div class="chap-card'+(ch.available?'':' locked')+'"'+accentStyle+(ch.available?' onclick="openChap('+ch.id+')"':'')+'>';
+    var html='<div class="chap-card'+(ch.available?'':' locked')+'"'+accentStyle+(ch.available?' data-onclick="openChap" data-args="['+ch.id+']"':'')+'>';
     html+=done?'<div class="chap-stamp">'+ICONS.check+'</div>':'<div class="chap-num">'+String(ch.id).padStart(2,'0')+'</div>';
     html+='<div class="chap-icon-badge">'+(ch.available?ICONS[ch.icon]:ICONS.locked)+'</div>';
     html+='<div class="chap-title">'+ch.title+'</div>';
@@ -6949,12 +7074,12 @@ function renderQuestion_ch1(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-choices-ch1">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qcmAnswer_ch1('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qcmAnswer_ch1" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+letters[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch1"><div class="q-fb-title" id="qcm-fbt-ch1"></div><div id="qcm-fbx-ch1"></div></div>';
   var isLast=(i===4);
-  html+='<button class="q-next-btn" id="qcm-next-ch1" onclick="'+(isLast?'qcmFinish_ch1()':'qcmNext_ch1()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch1" data-onclick="'+(isLast?'qcmFinish_ch1':'qcmNext_ch1')+'">'+
     (isLast?'Voir mes résultats →':'Question suivante →')+'</button></div>';
   document.getElementById('qcm-body-ch1').innerHTML=html;
 }
@@ -7006,7 +7131,7 @@ function qcmFinish_ch1(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recapHtml+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qcmRestart_ch1()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qcmRestart_ch1">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch1');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qcm-ring-ch1');if(r)r.style.strokeDashoffset=offset.toFixed(1);},100);
@@ -7471,12 +7596,12 @@ function renderQuestion_ch2(i){
   html+='<div class="q-text">'+q.text+'</div>';
   html+='<div class="choices" id="qcm-choices-ch2">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qcmAnswer_ch2('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qcmAnswer_ch2" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+letters[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div>';
   html+='<div class="q-feedback" id="qcm-fb-ch2"><div class="q-fb-title" id="qcm-fbt-ch2"></div><div id="qcm-fbx-ch2"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch2" onclick="'+(isLast?'qcmFinish_ch2()':'qcmNext_ch2()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch2" data-onclick="'+(isLast?'qcmFinish_ch2':'qcmNext_ch2')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch2').innerHTML=html;
 }
@@ -7528,7 +7653,7 @@ function qcmFinish_ch2(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recapHtml+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qcmRestart_ch2()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qcmRestart_ch2">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch2');
   res.innerHTML=html; res.classList.add('show');
   setTimeout(function(){ var r=document.getElementById('qcm-ring-ch2'); if(r) r.style.strokeDashoffset=offset.toFixed(1); },100);
@@ -7883,12 +8008,12 @@ function renderQuestion_ch3(i){
   html+='<div class="q-text">'+q.text+'</div>';
   html+='<div class="choices" id="qcm-choices-ch3">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qcmAnswer_ch3('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qcmAnswer_ch3" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+letters[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div>';
   html+='<div class="q-feedback" id="qcm-fb-ch3"><div class="q-fb-title" id="qcm-fbt-ch3"></div><div id="qcm-fbx-ch3"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch3" onclick="'+(isLast?'qcmFinish_ch3()':'qcmNext_ch3()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch3" data-onclick="'+(isLast?'qcmFinish_ch3':'qcmNext_ch3')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch3').innerHTML=html;
 }
@@ -7939,7 +8064,7 @@ function qcmFinish_ch3(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recapHtml+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qcmRestart_ch3()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qcmRestart_ch3">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch3');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qcm-ring-ch3');if(r)r.style.strokeDashoffset=offset.toFixed(1);},100);
@@ -8150,11 +8275,11 @@ function renderQ_ch4(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch4">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch4('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch4" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch4"><div class="q-fb-title" id="qcm-fbt-ch4"></div><div id="qcm-fbx-ch4"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch4" onclick="'+(isLast?'qFin_ch4()':'qNext_ch4()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch4" data-onclick="'+(isLast?'qFin_ch4':'qNext_ch4')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch4').innerHTML=html;
 }
@@ -8203,7 +8328,7 @@ function qFin_ch4(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch4()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch4">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch4');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch4');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -8415,11 +8540,11 @@ function renderQ_ch5(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch5">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch5('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch5" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch5"><div class="q-fb-title" id="qcm-fbt-ch5"></div><div id="qcm-fbx-ch5"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch5" onclick="'+(isLast?'qFin_ch5()':'qNext_ch5()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch5" data-onclick="'+(isLast?'qFin_ch5':'qNext_ch5')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch5').innerHTML=html;
 }
@@ -8468,7 +8593,7 @@ function qFin_ch5(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch5()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch5">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch5');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch5');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -8820,11 +8945,11 @@ function renderQ_ch6(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch6">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch6('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch6" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch6"><div class="q-fb-title" id="qcm-fbt-ch6"></div><div id="qcm-fbx-ch6"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch6" onclick="'+(isLast?'qFin_ch6()':'qNext_ch6()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch6" data-onclick="'+(isLast?'qFin_ch6':'qNext_ch6')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch6').innerHTML=html;
 }
@@ -8873,7 +8998,7 @@ function qFin_ch6(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch6()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch6">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch6');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch6');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -9110,11 +9235,11 @@ function renderQ_ch7(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch7">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch7('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch7" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch7"><div class="q-fb-title" id="qcm-fbt-ch7"></div><div id="qcm-fbx-ch7"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch7" onclick="'+(isLast?'qFin_ch7()':'qNext_ch7()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch7" data-onclick="'+(isLast?'qFin_ch7':'qNext_ch7')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch7').innerHTML=html;
 }
@@ -9163,7 +9288,7 @@ function qFin_ch7(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch7()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch7">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch7');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch7');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -9437,11 +9562,11 @@ function renderQ_ch8(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch8">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch8('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch8" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch8"><div class="q-fb-title" id="qcm-fbt-ch8"></div><div id="qcm-fbx-ch8"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch8" onclick="'+(isLast?'qFin_ch8()':'qNext_ch8()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch8" data-onclick="'+(isLast?'qFin_ch8':'qNext_ch8')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch8').innerHTML=html;
 }
@@ -9490,7 +9615,7 @@ function qFin_ch8(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch8()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch8">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch8');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch8');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -9724,11 +9849,11 @@ function renderQ_ch9(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch9">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch9('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch9" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch9"><div class="q-fb-title" id="qcm-fbt-ch9"></div><div id="qcm-fbx-ch9"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch9" onclick="'+(isLast?'qFin_ch9()':'qNext_ch9()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch9" data-onclick="'+(isLast?'qFin_ch9':'qNext_ch9')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch9').innerHTML=html;
 }
@@ -9777,7 +9902,7 @@ function qFin_ch9(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch9()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch9">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch9');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch9');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -10023,11 +10148,11 @@ function renderQ_ch10(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch10">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch10('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch10" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch10"><div class="q-fb-title" id="qcm-fbt-ch10"></div><div id="qcm-fbx-ch10"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch10" onclick="'+(isLast?'qFin_ch10()':'qNext_ch10()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch10" data-onclick="'+(isLast?'qFin_ch10':'qNext_ch10')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch10').innerHTML=html;
 }
@@ -10076,7 +10201,7 @@ function qFin_ch10(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch10()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch10">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch10');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch10');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);
@@ -10302,11 +10427,11 @@ function renderQ_ch11(i){
   var html='<div class="q-card"><div class="q-num-badge">Question '+(i+1)+' / 5</div>';
   html+='<div class="q-text">'+q.text+'</div><div class="choices" id="qcm-ch11">';
   q.choices.forEach(function(c,idx){
-    html+='<button class="choice-btn" onclick="qAns_ch11('+i+','+idx+','+(c.correct?'true':'false')+')">'
+    html+='<button class="choice-btn" data-onclick="qAns_ch11" data-args="['+i+','+idx+','+(c.correct?'true':'false')+']">'
       +'<span class="choice-letter">'+L[idx]+'</span><span>'+c.html+'</span></button>';
   });
   html+='</div><div class="q-feedback" id="qcm-fb-ch11"><div class="q-fb-title" id="qcm-fbt-ch11"></div><div id="qcm-fbx-ch11"></div></div>';
-  html+='<button class="q-next-btn" id="qcm-next-ch11" onclick="'+(isLast?'qFin_ch11()':'qNext_ch11()')+'">'+
+  html+='<button class="q-next-btn" id="qcm-next-ch11" data-onclick="'+(isLast?'qFin_ch11':'qNext_ch11')+'">'+
     (isLast?'Voir mes résultats &rarr;':'Question suivante &rarr;')+'</button></div>';
   document.getElementById('qcm-body-ch11').innerHTML=html;
 }
@@ -10355,7 +10480,7 @@ function qFin_ch11(){
     +'</div></div>'
     +'<div class="qcm-results-title">'+m.t+'</div><div class="qcm-results-sub">'+m.sub+'</div>'
     +'<div class="recap-list">'+recap+'</div>'
-    +'<button class="qcm-restart-btn" onclick="qRestart_ch11()">↺ Nouveau QCM</button>';
+    +'<button class="qcm-restart-btn" data-onclick="qRestart_ch11">↺ Nouveau QCM</button>';
   var res=document.getElementById('qcm-results-ch11');
   res.innerHTML=html;res.classList.add('show');
   setTimeout(function(){var r=document.getElementById('qring-ch11');if(r)r.style.strokeDashoffset=ro.toFixed(1);},100);

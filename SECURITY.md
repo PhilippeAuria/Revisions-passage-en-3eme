@@ -8,14 +8,25 @@ Révisions 4ème est une suite de fichiers statiques (HTML, CSS, JavaScript). El
 |--------|--------|
 | Script tiers | Aucun CDN ni bibliothèque externe. Les polices (Syne, DM Sans) sont copiées dans `assets/fonts/`. |
 | Fuite de données | Aucune requête réseau après le chargement. Rien n'est envoyé : ni identifiant, ni statistique, ni cookie. |
-| Injection (XSS) | Le contenu affiché vient uniquement des fichiers de l'application (questions générées par le code). Aucune donnée saisie par l'utilisateur n'est réinjectée comme HTML. |
+| Script injecté | Politique CSP stricte : seul le script de la page, reconnu par son empreinte, s'exécute ; aucun gestionnaire `onclick` en ligne. |
+| Injection (XSS) | Le contenu affiché vient uniquement des fichiers de l'application (cours, QCM et exercices). Aucune donnée saisie par l'utilisateur n'est réinjectée comme HTML. |
 | `eval` | Interdit : ni `eval`, ni `new Function`. |
 | Stockage local | Seuls votre progression et le thème clair ou sombre (clés commençant par `rev3eme`) sont gardés dans `localStorage`. |
 | Fichier importé | L'application n'importe aucun fichier. |
 
 ## Politique de sécurité du contenu (CSP)
 
-Cette version n'a **pas encore** de politique stricte (`Content-Security-Policy`) : l'application utilise des gestionnaires `onclick` en ligne et un script en ligne, incompatibles avec une politique stricte. Leur remplacement par des écouteurs d'événements est prévu. En attendant, les pages d'information (`mentions-legales.html`, `accessibilite.html`) n'exécutent aucun script.
+La page `index.html` contient une politique stricte, dans une balise `<meta http-equiv="Content-Security-Policy">` :
+
+```text
+default-src 'none'; script-src 'sha256-…'; style-src 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; font-src 'self'; connect-src 'none'; manifest-src 'self'; worker-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'
+```
+
+- **Un seul script s'exécute** : celui de la page, reconnu par son empreinte SHA-256 (`script-src 'sha256-…'`). Aucun `'unsafe-inline'` pour les scripts, aucun `eval`.
+- **Aucun gestionnaire en ligne** : il n'y a plus d'attribut `onclick`. Les boutons portent `data-onclick="fonction"` et, s'il y a des arguments, `data-args='[…]'` (`"@this"` désigne le bouton cliqué). Un écouteur unique appelle, via la table `ACTIONS` du script, la même fonction qu'avant avec les mêmes arguments.
+- **Aucune connexion réseau** (`connect-src 'none'`), aucun formulaire, aucun cadre, aucun objet intégré.
+- **Les styles en ligne restent autorisés** (`style-src 'unsafe-inline'`) : l'application est un seul fichier, variante prévue par le guide de la Forge.
+- **Mise à jour de l'empreinte** : elle change à chaque modification du script. Pour la recalculer, calculer le SHA-256 (en base64) du contenu de la balise `<script>`, fins de ligne normalisées en LF, et le reporter dans la balise `<meta>`.
 
 ## Limites de GitLab Pages
 

@@ -2,6 +2,12 @@
 
 Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/). Les versions antérieures sont dans l'historique Git du dépôt.
 
+## 2026-11-18
+
+### Sécurité
+- Politique de sécurité du contenu (CSP) stricte : seul le script de la page s'exécute, aucune connexion réseau.
+- Les attributs `onclick` en ligne sont remplacés par un écouteur d'événements unique. Le comportement de l'application est inchangé.
+
 ## 2026-11-05
 
 ### Ajouté
